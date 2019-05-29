@@ -9,8 +9,8 @@
     <link rel="stylesheet" href="/css/main.css" />
   </head>
 
-  <body>
-
+  <body bgcolor="#2597f1">
+    <h2 align="center" class="lab">Weather Forecast</h2>
     <div class="search">
       <input type="text" class="searchTerm" placeholder="Where do you live?" id="search-input">
       <button type="submit" class="searchButton" id="search-btn">Search</button>
@@ -46,9 +46,11 @@
           $.get('http://localhost:3000/getWeather?lat='+lat+'&long='+long, function(resp) {
             console.log('Resp');
             console.log(resp);
-            document.getElementById("temp-div").innerHTML="Temperature: "+resp.temp+" K";
-            document.getElementById("humidity-div").innerHTML="Humidity: "+resp.humidity;
-            document.getElementById("desc-div").innerHTML="It is: "+resp.desc;
+            let t=(parseFloat(resp.temp)-273.15).toFixed(2);
+            console.log(t);
+            document.getElementById("temp-div").innerHTML="Temperature: "+t+"°C";
+            document.getElementById("humidity-div").innerHTML="Humidity: "+resp.humidity+" %";
+            document.getElementById("desc-div").innerHTML=resp.desc;
             document.getElementById("wind-div").innerHTML="Wind: "+resp.wind+" mph";
           });
         }

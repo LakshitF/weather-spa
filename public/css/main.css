@@ -12,10 +12,17 @@
   left: 20%;
 }
 
+.lab {
+  font-size: 40;
+  font-family: "Arial";
+  margin-left: 70px;
+  color: #ffffff;
+}
+
 .temperature {
   position: absolute;
   left: 50%;
-  top: 10%;
+  top: 25%;
   height: 50%;
   width: 50%;
   background-color: #9c27b0;
@@ -26,7 +33,7 @@
   width: 50%;
   position: absolute;
   right: 50%;
-  top: 10%;
+  top: 25%;
   background-color: #28b463;
 }
 
@@ -35,7 +42,7 @@
   width: 50%;
   position: absolute;
   left: 50%;
-  top: 40%;
+  top: 60%;
   background-color: #f7e804;
 }
 
@@ -44,7 +51,7 @@
   width: 50%;
   position: absolute;
   right: 50%;
-  top: 40%;
+  top: 60%;
   background-color: #e91e63;
 }
 
@@ -63,7 +70,7 @@
   height: 36px;
   border-radius: 5px 0 0 5px;
   outline: none;
-  color: #9dbfaf;
+  color: #2691e5;
 }
 
 .searchTerm:focus {
