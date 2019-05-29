@@ -14,8 +14,11 @@
   "dependencies": {
     "axios": "^0.18.0",
     "concurrently": "^4.1.0",
+    "connect-mongodb-session": "^2.1.1",
     "cors": "^2.8.5",
     "ejs": "^2.6.1",
-    "express": "^4.16.4"
+    "express": "^4.16.4",
+    "mongodb": "^3.1.13",
+    "mongoose": "^5.4.19"
   }
 }
