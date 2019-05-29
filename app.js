@@ -8,7 +8,7 @@ const placeApiKey = "AIzaSyCmNGbr6x9pWBrunCOBJzs4NBCgaM9Om74";
 let weatherApiKey = "65115231b9cd6811585d6a9f4ef06c79"; //unterminated string constant
 const axios = require("axios");
 
-app.use(cors({ credentials: true, origin: "http://localhost:8000" }));
+// app.use(cors({ credentials: true, origin: "http://localhost:8000" }));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static("public"));
 app.use(express.static(path.join(__dirname, "static"))); //allows all files inside static folder to be linked using href
@@ -32,8 +32,6 @@ app.get("/", (req, res, next) => {
 
 app.get("/getWeather", (req, res, next) => {
   let latitude, longitude, des, humidity, temp, wind;
-  console.log("req body in node");
-  console.log(req.query.lat);
   latitude = req.query.lat;
   longitude = req.query.long;
   let weatherUrl =
@@ -51,7 +49,7 @@ app.get("/getWeather", (req, res, next) => {
       temp = data.main.temp;
       wind = data.wind.speed;
       humidity = data.main.humidity;
-      res.json({ des: des, humidity: humidity, temp: temp, wind: wind }); //never forget async
+      res.json({ desc: des, humidity: humidity, temp: temp, wind: wind });
     })
     .catch(err => {
       console.log("Could not fetch weather details");
@@ -62,5 +60,3 @@ app.get("/getWeather", (req, res, next) => {
 app.listen(3000, function init() {
   console.log("Weather App Running on Port 3000");
 });
-
-// api.openweathermap.org/data/2.5/weather?lat=35&lon=139

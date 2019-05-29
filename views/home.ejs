@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -10,17 +10,29 @@
   </head>
 
   <body>
-    <h3>Welcome</h3>
-    <div>
-      <input
-        id="search-input"
-        class="controls"
-        type="text"
-        placeholder="Search Box"
-      />
-      <button id="search-btn">Get Weather</button>
 
+    <div class="search">
+      <input type="text" class="searchTerm" placeholder="Where do you live?" id="search-input">
+      <button type="submit" class="searchButton" id="search-btn">Search</button>
+   </div>
+
+    <div>
+      <div class="temperature">
+        <div id="temp-div">Temperature</div>
+      </div>
+      <div class="humidity">
+        <div id="humidity-div">Humidity</div>
+      </div>
+      <div class="desc">
+        <div id="desc-div">Description</div>
+      </div>
+      <div class="wind">
+        <div id="wind-div">Wind Speed(mph)</div>
+      </div>
     </div>
+
+    <!--JS Logic-->
+    <!--Google places api-->
     <script
       src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCmNGbr6x9pWBrunCOBJzs4NBCgaM9Om74&libraries=places&callback=initAutocomplete"
       async
@@ -28,14 +40,17 @@
     ></script>
     <script>
         let lat,long;
-        function getWeather()
+        function getWeather()  //communicate with express rest api
         {
           let input = document.getElementById('search-input');
           $.get('http://localhost:3000/getWeather?lat='+lat+'&long='+long, function(resp) {
             console.log('Resp');
             console.log(resp);
-            console.log(resp.des);
-        });
+            document.getElementById("temp-div").innerHTML="Temperature: "+resp.temp+" K";
+            document.getElementById("humidity-div").innerHTML="Humidity: "+resp.humidity;
+            document.getElementById("desc-div").innerHTML="It is: "+resp.desc;
+            document.getElementById("wind-div").innerHTML="Wind: "+resp.wind+" mph";
+          });
         }
 
         function initAutocomplete()
@@ -46,12 +61,12 @@
           let autocomplete = new google.maps.places.Autocomplete(input);
           let place = autocomplete.getPlace();
           autocomplete.addListener('place_changed', function() {
-          var place = autocomplete.getPlace();
-          console.log('Autocomplete got called');
-          lat = place.geometry.location.lat();
-          long = place.geometry.location.lng();
-          console.log(lat);
-          console.log(long);
+            var place = autocomplete.getPlace();
+            console.log('Autocomplete got called');
+            lat = place.geometry.location.lat();
+            long = place.geometry.location.lng();
+            console.log(lat);
+            console.log(long);
           });
 
           searchBox.addListener('places_changed', function() {

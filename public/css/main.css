@@ -1,0 +1,83 @@
+#in-div,
+#temp-div,
+#humidity-div,
+#desc-div,
+#wind-div {
+  font-family: "Arial";
+  font-weight: bold;
+  font-size: 40px;
+  color: #fff;
+  position: absolute;
+  top: 10%;
+  left: 20%;
+}
+
+.temperature {
+  position: absolute;
+  left: 50%;
+  top: 10%;
+  height: 50%;
+  width: 50%;
+  background-color: #9c27b0;
+}
+
+.desc {
+  height: 50%;
+  width: 50%;
+  position: absolute;
+  right: 50%;
+  top: 10%;
+  background-color: #28b463;
+}
+
+.humidity {
+  height: 40%;
+  width: 50%;
+  position: absolute;
+  left: 50%;
+  top: 40%;
+  background-color: #f7e804;
+}
+
+.wind {
+  height: 40%;
+  width: 50%;
+  position: absolute;
+  right: 50%;
+  top: 40%;
+  background-color: #e91e63;
+}
+
+.search {
+  width: 80%;
+  margin-left: 70px;
+  position: relative;
+  display: flex;
+}
+
+.searchTerm {
+  width: 100%;
+  border: 3px solid #00b4cc;
+  border-right: none;
+  padding: 5px;
+  height: 36px;
+  border-radius: 5px 0 0 5px;
+  outline: none;
+  color: #9dbfaf;
+}
+
+.searchTerm:focus {
+  color: #00b4cc;
+}
+
+.searchButton {
+  width: 100px;
+  height: 36px;
+  border: 1px solid #00b4cc;
+  background: #00b4cc;
+  text-align: center;
+  color: #fff;
+  border-radius: 0 5px 5px 0;
+  cursor: pointer;
+  font-size: 20px;
+}
