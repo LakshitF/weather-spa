@@ -5,7 +5,7 @@ const path = require("path");
 const ejs = require("ejs");
 const cors = require("cors");
 const placeApiKey = "AIzaSyCmNGbr6x9pWBrunCOBJzs4NBCgaM9Om74";
-const weatherApiKey = "65115231b9cd6811585d6a9f4ef06c79";
+let weatherApiKey = "65115231b9cd6811585d6a9f4ef06c79"; //unterminated string constant
 const axios = require("axios");
 
 app.use(cors({ credentials: true, origin: "http://localhost:8000" }));
@@ -32,13 +32,31 @@ app.get("/", (req, res, next) => {
 
 app.get("/getWeather", (req, res, next) => {
   let latitude, longitude, des, humidity, temp, wind;
-  let weatherUrl = `http://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${weatherApiKey}`;
-  axios.get(weatherUrl).then(data => {
-    des = data.weather[0].main;
-    humidity = data.main.humidity;
-    temp = data.main.temp;
-    wind = data.wind.speed;
-  });
+  console.log("req body in node");
+  console.log(req.query.lat);
+  latitude = req.query.lat;
+  longitude = req.query.long;
+  let weatherUrl =
+    "http://api.openweathermap.org/data/2.5/weather?lat=" +
+    latitude +
+    "&lon=" +
+    longitude +
+    "&appid=" +
+    weatherApiKey;
+  axios
+    .get(weatherUrl)
+    .then(data => {
+      data = data.data;
+      des = data.weather[0].main;
+      temp = data.main.temp;
+      wind = data.wind.speed;
+      humidity = data.main.humidity;
+      res.json({ des: des, humidity: humidity, temp: temp, wind: wind }); //never forget async
+    })
+    .catch(err => {
+      console.log("Could not fetch weather details");
+      console.log(err);
+    });
 });
 
 app.listen(3000, function init() {
