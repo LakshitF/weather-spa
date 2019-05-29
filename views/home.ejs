@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Weather Application</title>
+    <link rel="stylesheet" href="/css/main.css" />
+  </head>
+
+  <body>
+    <h3>Welcome</h3>
+    <div>
+      <input
+        id="search-input"
+        class="controls"
+        type="text"
+        placeholder="Search Box"
+      />
+      <button id="search-btn">Get Weather</button>
+    </div>
+    <script
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCmNGbr6x9pWBrunCOBJzs4NBCgaM9Om74&libraries=places&callback=initAutocomplete"
+      async
+      defer
+    ></script>
+    <script>
+      function getLatLong()
+        {//
+          let geocoder = new google.maps.Geocoder();
+          let address = document.getElementById('search-input').value;
+          let latitude,longitude;
+          geocoder.geocode({ 'address': address }, function (results, status)
+          {
+              if (status == google.maps.GeocoderStatus.OK) {
+                  latitude = results[0].geometry.location.lat();
+                  longitude = results[0].geometry.location.lng();
+
+              }
+          });
+          let arr=[latitude,longitude];
+          console.log(latitude);
+          console.log(longitude);
+          return arr;
+        }
+
+        function initAutocomplete()
+        {
+          // Create the search box and link it to the UI element.
+          var input = document.getElementById('search-input');
+          var searchBox = new google.maps.places.SearchBox(input);
+          // Listen for the event fired when the user selects a prediction and retrieve
+          // more details for that place.
+          searchBox.addListener('places_changed', function() {
+            var places = searchBox.getPlaces();
+            if (places.length == 0) {
+              return;
+            }
+          });
+        }
+
+        let searchButton = document.getElementById("search-btn");
+        let arr=getLatLong();
+        let latitude=arr[0];
+        let longitude=arr[1];
+        searchButton.addEventListener("click", getWeather);
+        function getWeather()
+        {
+          $.ajax({
+                   url: 'http://localhost:3000/getWeather',
+                    type: "GET",
+                    dataType: "jsonp",
+                    success: function(data){
+                        show(data);
+                    }
+            });
+        }
+
+        function show()
+        {
+          console.log()
+        }
+    </script>
+
+  </body>
+</html>
