@@ -4,8 +4,8 @@ const bodyParser = require("body-parser");
 const path = require("path");
 const ejs = require("ejs");
 const cors = require("cors");
-const placeApiKey = "AIzaSyCmNGbr6x9pWBrunCOBJzs4NBCgaM9Om74";
-let weatherApiKey = "65115231b9cd6811585d6a9f4ef06c79"; //unterminated string constant
+const placeApiKey = ""; //hidden :)
+let weatherApiKey = ""; //unterminated string constant
 const axios = require("axios");
 
 // app.use(cors({ credentials: true, origin: "http://localhost:8000" }));
