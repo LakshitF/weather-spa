@@ -1,0 +1,69 @@
+import cv2
+from sys import stdin, stdout  
+
+def binaryToDecimal(binary): 
+    binary1 = binary 
+    decimal, i, n = 0, 0, 0
+    while(binary != 0): 
+        dec = binary % 10
+        decimal = decimal + dec * pow(2, i) 
+        binary = binary//10
+        i += 1
+    return decimal
+
+def encodeImage(msg):
+    path=r'e:/repos/lakshit/index.jpeg'
+    im = cv2.imread(path)
+    k=0    #iterate through str
+    length=len(msg)
+    for row in im[0:2]:
+        for cell in row:
+            red=cell[0]
+            binary=format(red,'07b')
+            tempList=list(binary)
+            tempList[3]=msg[k]
+            k=k+1
+            if(k>=length):
+                break
+            tempList[4]=msg[k]
+            k=k+1
+            if(k>=length):
+                break
+            binary="".join(tempList)
+            tempInt=int(binary)
+            temp=binaryToDecimal(tempInt)
+            cell[0]=temp
+        if(k>=length):
+            break
+            
+    cv2.imwrite('encoded.jpeg',im)
+
+# Main Function         
+def main(): 
+    print("Enter messsage to encode!")
+    str=input()
+    msg=""
+    for x in str:
+        msg=msg+format(ord(x),'07b')
+    print(msg)
+    encodeImage(msg)
+
+
+
+#With flip
+def encodeImageFlip(msg):
+    path=r'e:/repos/lakshit/index.jpeg'
+    im = cv2.imread(path)
+    k=0    #iterate through str
+    for row in im[0:2]:
+        for cell in row:
+            red=cell[0]
+            binary=format(red,'b')
+            tempList=list(binary)
+            tempList[-3]=msg[k]
+            tempList[-4]=msg[k]
+            binary="".join(tempList)
+          
+# Driver Code 
+if __name__ == '__main__' : 
+    main() 
