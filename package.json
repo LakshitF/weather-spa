@@ -12,7 +12,7 @@
   "author": "lakshit",
   "license": "ISC",
   "dependencies": {
-    "axios": "^0.18.0",
+    "axios": "^0.21.1",
     "concurrently": "^4.1.0",
     "connect-mongodb-session": "^2.1.1",
     "cors": "^2.8.5",
